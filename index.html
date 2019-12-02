@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Message Visualisation</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="nouislider.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Hind+Guntur:300,400,600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="nouislider.min.js"></script>
+  </head>
+  <body>
+    <main>
+      <!-- <label for="whatsapp-file">Choose WhatsApp chat file:</label>
+      <input
+        type="file"
+        id="whatsapp-file"
+        name="whatsapp-file"
+        accept=".txt"
+      />
+      <label for="fb-file">Choose Facebook chat file:</label>
+      <input type="file" id="fb-file" name="fb-file" accept=".json" /> -->
+      <img src="logo.png" alt="Logo kampanii Za dane!" class="logo-image" />
+      <p class="intro-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur.
+      </p>
+      <label class="fb-dir-label" for="fb-dir"
+        >Wybierz folder <code>messages</code
+        ><input type="file" id="fb-dir" name="fb-dir" webkitdirectory multiple
+      /></label>
+
+      <section class="general-section">
+        <div class="general-stats-container">
+          <div class="general-section-description">
+            <h1 class="general-description-heading">Dane całkowite</h1>
+            <p class="general-description-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam.
+            </p>
+            <div class="legend">
+              <div class="legend-color-participant"></div>
+              <div class="legend-name">Otrzymane</div>
+              <div class="legend-color-user"></div>
+              <div class="legend-name">Wysłane</div>
+            </div>
+          </div>
+          <div class="bars-container">
+            <div class="num-bar-container bar-container">
+              <h3 class="bar-title">Znaki ogółem</h3>
+            </div>
+            <div class="longest-bar-container bar-container">
+              <h3 class="bar-title">Liczba znaków najdłuższej wiadomości</h3>
+            </div>
+            <div class="per-day-bar-container bar-container">
+              <h3 class="bar-title">Wiadomości na dzień</h3>
+            </div>
+            <div class="avg-len-bar-container bar-container">
+              <h3 class="bar-title">Średnia liczba znaków w wiadomości</h3>
+            </div>
+          </div>
+          <div class="hour-chart-container">
+            <h3 class="general-chart-title">
+              Aktywność na czacie w ciągu dnia
+            </h3>
+          </div>
+          <div class="weekdays-chart-container">
+            <h3 class="general-chart-title">
+              Aktywność na czacie w ciągu tygodnia
+            </h3>
+          </div>
+          <div class="year-slider-container">
+            <h2 class="slider-heading">Analizuj dane z lat:</h2>
+            <div class="slider"></div>
+          </div>
+          <div class="friends-daily-container">
+            <div class="friends-daily-icon"></div>
+            <p class="friends-daily-text">
+              Średnio dziennie kontaktujesz się z
+              <span class="friends-daily-num"></span> osób.
+            </p>
+          </div>
+        </div>
+        <div class="timeline-section">
+          <h1 class="timeline-heading">Oś czasu Twojej aktywności</h1>
+          <p class="timeline-description">
+            Naciśnij na dowolnym miejscu osi, aby zobaczyć swoje rozmowy z tego
+            dnia.
+          </p>
+          <div class="timeline-chart-container"></div>
+          <div class="conversation-box">
+            <button class="load-prev">Pokaż wcześniejsze</button>
+            <div class="message-box-user empty-state-message">
+              Tutaj pojawią się Twoje wiadomości, gdy klikniesz na oś czasu.
+              Przenieś się w czasie!
+            </div>
+            <button class="load-next">Pokaż późniejsze</button>
+          </div>
+        </div>
+        <section class="ranking-section">
+          <h1 class="ranking-heading">
+            Osoby, z którymi najczęściej rozmawiasz
+          </h1>
+          <p class="ranking-description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam
+          </p>
+          <div class="ranking-chart-container"></div>
+          <h2 class="slider-ranking-heading">Analizuj dane z lat:</h2>
+          <div class="ranking-slider"></div>
+        </section>
+      </section>
+
+      <section class="conversation-section">
+        <div class="general-stats-container">
+          <div class="general-section-description">
+            <h1 class="general-description-heading">Dane całkowite</h1>
+            <p class="general-description-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam.
+            </p>
+            <div class="legend">
+              <div class="legend-color-participant"></div>
+              <div class="legend-name legend-name-participant"></div>
+              <div class="legend-color-user"></div>
+              <div class="legend-name legend-name-user">Ty</div>
+            </div>
+          </div>
+          <div class="bars-container">
+            <div class="num-bar-container bar-container">
+              <h3 class="bar-title">Znaki ogółem</h3>
+            </div>
+            <div class="longest-bar-container bar-container">
+              <h3 class="bar-title">Liczba znaków najdłuższej wiadomości</h3>
+            </div>
+            <div class="per-day-bar-container bar-container">
+              <h3 class="bar-title">Wiadomości na dzień</h3>
+            </div>
+            <div class="avg-len-bar-container bar-container">
+              <h3 class="bar-title">Średnia liczba znaków w wiadomości</h3>
+            </div>
+          </div>
+          <div class="hour-chart-container">
+            <h3 class="general-chart-title">
+              Aktywność na czacie w ciągu dnia
+            </h3>
+          </div>
+          <div class="weekdays-chart-container">
+            <h3 class="general-chart-title">
+              Aktywność na czacie w ciągu tygodnia
+            </h3>
+          </div>
+          <div class="year-slider-container">
+            <h2 class="slider-heading">Analizuj dane z lat:</h2>
+            <div class="slider"></div>
+          </div>
+        </div>
+        <div class="timeline-section">
+          <h1 class="timeline-heading">Oś czasu Waszej aktywności</h1>
+          <p class="timeline-description">
+            Naciśnij na dowolnym miejscu osi, aby zobaczyć Wasze rozmowy z tego
+            dnia.
+          </p>
+          <div class="timeline-chart-container"></div>
+          <div class="conversation-box">
+            <button class="load-prev">Pokaż wcześniejsze</button>
+            <div class="message-box-user empty-state-message">
+              Tutaj pojawią się Wasze wiadomości, gdy klikniesz na oś czasu.
+              Przenieś się w czasie!
+            </div>
+            <button class="load-next">Pokaż późniejsze</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="scripts.js"></script>
+  </body>
+</html>

@@ -22,6 +22,13 @@ export default function createFriendsDailyChart(data, containerSelector) {
         .style("width", peoplePerDay * 50 + "px")
         .style("height", "50px")
         .style("background-size", "50px 50px");
+    } else if (peoplePerDay > 10) {
+      icons
+        .transition()
+        .duration(400)
+        .style("width", 10 * 50 + "px")
+        .style("height", "50px")
+        .style("background-size", "50px 50px");
     }
   }
 }

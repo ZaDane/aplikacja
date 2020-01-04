@@ -48,53 +48,38 @@ export function objectifyWhatsAppChat(chat) {
   return users;
 }
 
-export function objectifyFbChat(chat) {
-  const text = fixFacebookEncoding(chat);
+export function objectifyFbChat(text) {
   const chatObj = JSON.parse(text);
-  if (chatObj.participants.length !== 2) {
+
+  if (chatObj.thread_type !== "Regular") {
     return false;
   }
   let users = [
-    { name: chatObj.participants[0].name, msgs: [] },
-    { name: chatObj.participants[1].name, msgs: [] }
+    { name: fixFacebookEncoding(chatObj.participants[0].name), msgs: [] },
+    { name: fixFacebookEncoding(chatObj.participants[1].name), msgs: [] }
   ];
   chatObj.messages.forEach(msg => {
     if ("content" in msg) {
       users
-        .find(user => user.name === msg.sender_name)
-        .msgs.push({ text: msg.content, date: new Date(msg.timestamp_ms) });
+        .find(user => user.name === fixFacebookEncoding(msg.sender_name))
+        .msgs.push({
+          text: fixFacebookEncoding(msg.content),
+          date: new Date(msg.timestamp_ms)
+        });
     }
   });
-  users.forEach(user => user.msgs.reverse());
+
   return users;
 }
 
+const decoder = new TextDecoder("utf-8", { fatal: true });
+
 function fixFacebookEncoding(text) {
-  const reg = new RegExp("Å|Å|Å¼|Å|Ä|Ã³|Ä|Ä|Å»", "g", "u");
-  return JSON.stringify(JSON.parse(text)).replace(reg, match => {
-    switch (match) {
-      case "Ä":
-        return "ą";
-      case "Ä":
-        return "ć";
-      case "Ä":
-        return "ę";
-      case "Å":
-        return "ł";
-      case "Å":
-        return "ń";
-      case "Ã³":
-        return "ó";
-      case "Å":
-        return "ś";
-      case "":
-        return "ź";
-      case "Å¼":
-        return "ż";
-      case "Å¼":
-        return "Ż";
-    }
-  });
+  const codeArray = text.split("").map(char => char.charCodeAt(0));
+
+  const byteArray = Uint8Array.from(codeArray);
+
+  return decoder.decode(byteArray);
 }
 
 export function objectifyFbDirectory() {}

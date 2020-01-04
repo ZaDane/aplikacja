@@ -3,8 +3,8 @@ const margin = { top: 0, right: 20, bottom: 30, left: 20 },
   barSpacing = 10,
   barWidth = (width - barSpacing * 6) / 14,
   height = 300 - margin.top - margin.bottom,
-  colorA = "#B99FCD",
-  colorB = "#A09FCB";
+  colorA = "#ca89e1",
+  colorB = "#8191e9";
 
 export default function createWeekdaysChart(data, containerSelector) {
   let userByDays = extractDayCharCount(data.getUserMsgs());

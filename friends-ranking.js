@@ -3,8 +3,8 @@ var margin = { top: 30, right: 20, bottom: 30, left: 20 },
   width =
     document.documentElement.clientWidth * 0.8 - margin.left - margin.right,
   height = 800 - margin.top - margin.bottom,
-  colorA = "#B99FCD",
-  colorB = "#A09FCB";
+  colorA = "#ca89e1",
+  colorB = "#8191e9";
 
 var svg = insertSvg(".ranking-chart-container");
 
@@ -300,6 +300,76 @@ function createBars(top, data, createChatStats) {
     .duration(400)
     .text(d => d.chars)
     .attr("y", (d, i) => scaleY(i) + 38 + 15);
+
+  const clickArea = svg.selectAll(".click-area").data(top);
+  clickArea
+    .enter()
+    .append("rect")
+    .style("fill", "transparent")
+    .style("cursor", "pointer")
+    .attr("width", width)
+    .attr("class", "click-area")
+    .attr("y", height)
+    .attr("x", 0)
+    .on("click", d =>
+      createChatStats(
+        data.extractDataWithPerson(d.person),
+        ".conversation-section"
+      )
+    )
+    .on("mouseover", (d, i) => {
+      svg
+        .selectAll(".name")
+        .filter(nameD => nameD.person === d.person)
+        .style("fill", "#B72467");
+      svg
+        .selectAll(".char-num")
+        .filter(nameD => nameD.person === d.person)
+        .style("fill", "#B72467");
+      svg
+        .selectAll(".bar")
+        .filter(nameD => nameD.person === d.person)
+        .style("fill", "#B72467");
+      svg.select(".activity-line" + i).style("stroke", "#B72467");
+    })
+
+    .on("mouseout", (d, i) => {
+      svg
+        .selectAll(".name")
+        .filter(nameD => nameD.person === d.person)
+        .style("fill", "#000000");
+      svg
+        .selectAll(".char-num")
+        .filter(nameD => nameD.person === d.person)
+        .style("fill", "#000000");
+      svg
+        .selectAll(".bar")
+        .filter(nameD => nameD.person === d.person)
+        .style("fill", colorB);
+      svg.select(".activity-line" + i).style("stroke", colorB);
+    })
+    .on("click", d =>
+      createChatStats(
+        data.extractDataWithPerson(d.person),
+        ".conversation-section"
+      )
+    )
+    .transition()
+    .duration(400)
+    .attr("height", 75)
+    .attr("y", (d, i) => scaleY(i) - 5);
+
+  clickArea
+    .exit()
+    .transition()
+    .duration(400)
+    .attr("y", height - 5)
+    .remove();
+
+  clickArea
+    .transition()
+    .duration(400)
+    .attr("y", (d, i) => scaleY(i) - 5);
 }
 
 function getTopTenChars(start, end, stats) {

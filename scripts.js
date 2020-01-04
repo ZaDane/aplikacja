@@ -30,6 +30,13 @@ import createFriendsDailyChart from "./friends-daily-chart.js";
 //   };
 // }
 
+if (window.screen.width <= 1024) {
+  document.querySelector(".mobile-alert").style.display = "block";
+  document.querySelector(".mobile-continue").addEventListener("click", () => {
+    document.querySelector(".mobile-alert").style.display = "none";
+  });
+}
+
 function createChatStats(data, containerSelector) {
   const cont = d3.select(containerSelector);
   cont.style("display", "flex");

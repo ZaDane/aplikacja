@@ -197,7 +197,7 @@ details[open] .welcome-question {
 
 .ranking-description {
   width: 600px;
-  margin: 0 0 50px 10px;
+  margin: 0 0 50px 30px;
 }
 
 .ranking-slider {
@@ -305,6 +305,50 @@ details[open] .welcome-question {
 
 .fb-dir-label code {
   font-family: monospace;
+}
+
+.mobile-alert {
+  display: none;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+}
+
+.logo-mobile {
+  display: block;
+  width: 50%;
+  margin: 10vh auto 5vh;
+}
+
+.mobile-text {
+  font-size: 18px;
+  color: #2b2b2b;
+  line-height: 1.4;
+  width: 85%;
+  margin: 0 auto 15px;
+}
+
+.mobile-continue {
+  display: block;
+  border: 1px solid transparent;
+  padding: 10px 0;
+  font-size: 16px;
+  background: transparent;
+  cursor: pointer;
+  font-variant: small-caps;
+  width: 200px;
+  margin: 8vh auto;
+  transition: border 0.2s, border-radius 0.2s, color 0.2s, opacity 0.2s;
+}
+
+.mobile-continue:hover {
+  border: 1px solid #b72467;
+  border-radius: 20px;
+  color: #b72467;
 }
 
 .page-footer {

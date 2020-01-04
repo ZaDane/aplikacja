@@ -4,8 +4,8 @@ const margin = { top: 0, right: 0, bottom: 0, left: 0 },
   barHeight = 20,
   width = 400 - margin.left - margin.right,
   height = barHeight * 2 + spacing - margin.top - margin.bottom,
-  colorA = "#B99FCD",
-  colorB = "#A09FCB";
+  colorA = "#ca89e1",
+  colorB = "#8191e9";
 
 function computeTotalCharsBar(data) {
   const charsOther = d3.sum(data.getParticipantMsgs(), msg => msg.text.length);

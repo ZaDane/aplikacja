@@ -10,16 +10,31 @@
     <title>Message Visualisation</title>
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="nouislider.min.css" />
+    <link rel="stylesheet" href="luminous-basic.min.css" />
     <link rel="stylesheet" href="styles.css" />
+
     <link
       href="https://fonts.googleapis.com/css?family=Hind+Guntur:300,400,600&display=swap"
       rel="stylesheet"
     />
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="nouislider.min.js"></script>
+    <script src="Luminous.min.js"></script>
   </head>
   <body>
     <main>
+      <div class="loader-container">
+        <p class="loader-text">
+          To duże pliki. Tworzenie statystyk może zająć od kilku do
+          kilkudziesięciu sekund. <strong>Pozostań na karcie.</strong>
+        </p>
+        <p class="loader-error-text">
+          Ups, wystąpił błąd. Jeśli mimo postępowania wg instrukcji będzie się
+          on powtarzał, prosimy – daj nam o tym znać!
+        </p>
+        <button class="loader-error-button">Spróbuj ponownie</button>
+        <img src="loader.gif" alt="" class="loader-gif" />
+      </div>
       <!-- <label for="whatsapp-file">Choose WhatsApp chat file:</label>
       <input
         type="file"
@@ -29,14 +44,167 @@
       />
       <label for="fb-file">Choose Facebook chat file:</label>
       <input type="file" id="fb-file" name="fb-file" accept=".json" /> -->
-      <img src="logo.png" alt="Logo kampanii Za dane!" class="logo-image" />
-      <p class="intro-text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur.
+      <header class="hero-section">
+        <img src="logo.png" alt="Logo kampanii Za dane!" class="logo-image" />
+        <div class="hero-texts-container">
+          <h1 class="intro-text">
+            <i>Za dane!</i> prezentuje aplikację, dzięki której poprzez
+            wizualizację własnych danych z Messengera poznasz swoje nawyki
+            komunikacyjne od podszewki.
+          </h1>
+          <ul class="faq">
+            <li class="faq-item">
+              <details class="faq-details">
+                <summary class="welcome-question">Kim jesteśmy?</summary>
+                <p class="welcome-answer">
+                  Za dane! to kampania społeczna. Jako jej twórcy chcemy zwrócić
+                  Waszą uwagę na sposób wykorzystania udostępnianych przez Was
+                  danych w internecie. Powiemy Wam, kto, w jaki sposób i do
+                  czego może wykorzystać Wasze informacje. Od nas dowiecie się
+                  także, jak możecie zadbać o Wasze bezpieczeństwo w internecie.
+                  Już teraz polubcie nasz
+                  <a href="https://www.facebook.com/kampania.za.dane/"
+                    >profil na Facebooku</a
+                  >
+                  i bądźcie na bieżąco!
+                </p>
+              </details>
+            </li>
+            <li class="faq-item">
+              <details class="faq-details">
+                <summary class="welcome-question"
+                  >Do czego służy ta aplikacja?</summary
+                >
+                <p class="welcome-answer">
+                  Nasza aplikacja webowa to darmowe narzędzie do analizy
+                  wiadomości z Messengera. Dzięki niej poznasz swoje nawyki
+                  komunikacyjne – z kim i jak dużo rozmawiasz, a także w które
+                  dni tygodnia i o jakich godzinach jesteś najbardziej aktywny.
+                  Masz również możliwość łatwego sprawdzenia historii wiadomości
+                  – wystarczy kliknąć na datę! Nie musisz scrollować w
+                  nieskończoność. Dodatkowym atutem jest miernik przekleństw –
+                  sprawdź, jak często przeklinasz!
+                </p>
+              </details>
+            </li>
+            <li class="faq-item">
+              <details class="faq-details">
+                <summary class="welcome-question"
+                  >Czy aplikacja ma jakieś wady?</summary
+                >
+                <p class="welcome-answer">
+                  Tak. Niestety nie działa na tabletach i smartfonach ze względu
+                  na ograniczenia techniczne przeglądarek mobilnych, których nie
+                  jesteśmy w stanie obejść. Na tę chwilę również nie są brane
+                  pod uwagę dane z konwersacji grupowych – pracujemy nad tym!
+                </p>
+              </details>
+            </li>
+            <li class="faq-item">
+              <details class="faq-details">
+                <summary class="welcome-question"
+                  >Czy widzimy Twoje dane?</summary
+                >
+                <p class="welcome-answer">
+                  Nie. Nie przechowujemy ani nie ściągamy załadowanych plików.
+                  Narzędzie działa lokalnie w Twojej przeglądarce. Połączenie
+                  internetowe jest wymagane tylko do załadowania się strony, a
+                  nie do samego funkcjonowania aplikacji. Możesz nawet odłączyć
+                  kabel sieciowy, zanim załadujesz swoje pliki. Twoje dane nie
+                  są nigdzie przez nas przekazywane i udostępniane.
+                </p>
+              </details>
+            </li>
+            <li class="faq-item">
+              <details class="faq-details">
+                <summary class="welcome-question"
+                  >Dane nie chcą się załadować/wyskoczył błąd. Co
+                  robić?</summary
+                >
+                <p class="welcome-answer">
+                  Załadowanie większych plików trwa trochę dłużej, dlatego
+                  czasem należy chwilę poczekać. Jeśli pojawi się powiadomienie
+                  o błędzie, odśwież stronę i ponownie umieść plik w aplikacji.
+                  W przypadku innych problemów prosimy o kontakt:
+                  <a href="mailto:za.dane.kampania@gmail.com"
+                    >za.dane.kampania@gmail.com</a
+                  >
+                </p>
+              </details>
+            </li>
+          </ul>
+          <a
+            class="facebook-link"
+            href="https://www.facebook.com/kampania.za.dane/"
+            ><img
+              class="facebook-logo"
+              src="fb-logo.png"
+              alt="Facebook's logo"
+            />
+            <p class="facebook-link-text">Znajdź nas na Facebooku</p>
+          </a>
+        </div>
+      </header>
+      <section class="intro-gallery-section">
+        <h2 class="gallery-heading">nasze wizualizacje</h2>
+        <ul class="intro-gallery">
+          <li class="intro-gallery-item">
+            <a href="zadane-ex-1.jpg">
+              <img src="zadane-ex-1.jpg" class="intro-gallery-image" alt="" />
+            </a>
+          </li>
+          <li class="intro-gallery-item">
+            <a href="zadane-ex-2.jpg">
+              <img src="zadane-ex-2.jpg" class="intro-gallery-image" alt="" />
+            </a>
+          </li>
+          <li class="intro-gallery-item">
+            <a href="zadane-ex-3.jpg">
+              <img src="zadane-ex-3.jpg" class="intro-gallery-image" alt="" />
+            </a>
+          </li>
+        </ul>
+      </section>
+      <p class="not-yet-loaded-message">
+        Tutaj wyświetli się wizualizacja Twoich danych, gdy tylko je załadujesz.
+        Postępuj zgodnie z instrukcją.
       </p>
+      <section class="instruction-section">
+        <h2 class="instruction-heading">instrukcja</h2>
+        <ol class="instruction-list">
+          <li class="instruction-step">
+            <p class="instruction-step-text">
+              Poproś o wygenerowanie swoich danych z platformy Facebook,
+              klikając w zakładkę „Ustawienia”, a następnie „Twoje informacje na
+              Facebooku” (instrukcję możesz zobaczyć
+              <a href="https://www.facebook.com/help/212802592074644">tutaj</a
+              >). Format danych ustaw na JSON – to ważne!
+            </p>
+          </li>
+          <li class="instruction-step">
+            <p class="instruction-step-text">
+              Gdy otrzymasz powiadomienie o możliwości pobrania danych, pobierz
+              je i rozpakuj – instrukcję, jak to zrobić, znajdziesz
+              <a
+                href="https://support.microsoft.com/en-us/help/14200/windows-compress-uncompress-zip-files"
+                >tutaj</a
+              >.
+            </p>
+          </li>
+          <li class="instruction-step">
+            <p class="instruction-step-text">
+              Kliknij w „wybierz folder messages” i załaduj wspomniany folder.
+              Powinien znajdować się w rozpakowanej zawartości.
+            </p>
+          </li>
+          <li class="instruction-step">
+            <p class="instruction-step-text">
+              Zobacz wizualizację swoich danych!
+            </p>
+          </li>
+        </ol>
+      </section>
+
       <label class="fb-dir-label" for="fb-dir"
         >Wybierz folder <code>messages</code
         ><input type="file" id="fb-dir" name="fb-dir" webkitdirectory multiple
@@ -47,9 +215,9 @@
           <div class="general-section-description">
             <h1 class="general-description-heading">Dane całkowite</h1>
             <p class="general-description-text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam.
+              W tej sekcji znajdziesz zwizualizowane statystyki dotyczące Twojej
+              ogólnej aktywności. Zobacz, jak zmieniała się ona na przestrzeni
+              lat i porównaj wyniki ze znajomymi!
             </p>
             <div class="legend">
               <div class="legend-color-participant"></div>
@@ -90,49 +258,134 @@
             <div class="friends-daily-icon"></div>
             <p class="friends-daily-text">
               Średnio dziennie kontaktujesz się z
-              <span class="friends-daily-num"></span> osób.
+              <span class="friends-daily-num"></span> osobami.
             </p>
           </div>
         </div>
         <div class="timeline-section">
           <h1 class="timeline-heading">Oś czasu Twojej aktywności</h1>
           <p class="timeline-description">
-            Naciśnij na dowolnym miejscu osi, aby zobaczyć swoje rozmowy z tego
-            dnia.
+            Naciśnij w dowolnym miejscu na osi, aby zobaczyć swoje rozmowy z
+            tego dnia.
           </p>
           <div class="timeline-chart-container"></div>
-          <div class="conversation-box">
-            <button class="load-prev">Pokaż wcześniejsze</button>
-            <div class="message-box-user empty-state-message">
-              Tutaj pojawią się Twoje wiadomości, gdy klikniesz na oś czasu.
-              Przenieś się w czasie!
+          <div class="timeline-details-container">
+            <div class="swear-words-container">
+              <h2 class="swear-words-title">Ile przeklinasz?</h2>
+              <p class="swear-words-explanation">
+                Im bardziej
+                <span class="swear-red-segment">czerwony</span> segment znajduje
+                się pod osią czasu, tym więcej przekleństw się pojawiało w
+                Twoich wiadomościach w tym okresie!
+              </p>
+              <h3 class="swear-words-list-title">Najczęstsze przekleństwa:</h3>
+              <ol class="swear-words-list">
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+              </ol>
+              <button class="show-swear-words-button">
+                Pokaż przekleństwa
+              </button>
+              <small class="swear-words-note"
+                >Tylko powyższe słowa (z uwzględnieniem odmiany i najczęstszych
+                zabiegów słowotwórczych) braliśmy pod uwagę jako
+                przekleństwa.</small
+              >
             </div>
-            <button class="load-next">Pokaż późniejsze</button>
+            <div class="conversation-box">
+              <button class="load-prev">Pokaż wcześniejsze</button>
+              <div class="message-box-user empty-state-message">
+                Tutaj pojawią się Twoje wiadomości, gdy klikniesz na oś czasu.
+              </div>
+              <button class="load-next">Pokaż późniejsze</button>
+            </div>
           </div>
         </div>
-        <section class="ranking-section">
+        <section class="ranking-section" id="ranking-section">
           <h1 class="ranking-heading">
             Osoby, z którymi najczęściej rozmawiasz
           </h1>
           <p class="ranking-description">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam
+            W tej sekcji znajdziesz statystyki dotyczące Twojej aktywności w
+            konwersacji z poszczególnymi użytkownikami. Kliknij w imię i
+            nazwisko, by przeanalizować historię Twojej messengerowej relacji z
+            dowolnym znajomym!
+          </p>
+          <p class="ranking-note">
+            <i>Użytkownik Facebooka</i> oznacza konto, które zostało usunięte,
+            zablokowane lub straciło przypisaną do niego nazwę.
           </p>
           <div class="ranking-chart-container"></div>
           <h2 class="slider-ranking-heading">Analizuj dane z lat:</h2>
           <div class="ranking-slider"></div>
         </section>
+        <div class="ranking-click-explanation">
+          <p class="ranking-click-explanation-text">
+            Wybierz osobę z listy, aby dowiedzieć się więcej o swojej
+            konwersacji z nią.
+          </p>
+          <img
+            src="ranking-arrow.svg"
+            alt=""
+            class="rankicg-click-explanation-arrow"
+          />
+        </div>
       </section>
 
       <section class="conversation-section">
+        <div class="conversation-name-container">
+          <p class="conversation-name-text"></p>
+          <div class="conversation-name-line"></div>
+        </div>
         <div class="general-stats-container">
           <div class="general-section-description">
             <h1 class="general-description-heading">Dane całkowite</h1>
             <p class="general-description-text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam.
+              W tej sekcji znajdziesz zwizualizowane statystyki dotyczące Twojej
+              ogólnej aktywności. Zobacz, jak zmieniała się ona na przestrzeni
+              lat i porównaj wyniki ze znajomymi!
             </p>
             <div class="legend">
               <div class="legend-color-participant"></div>
@@ -171,22 +424,113 @@
           </div>
         </div>
         <div class="timeline-section">
-          <h1 class="timeline-heading">Oś czasu Waszej aktywności</h1>
+          <h1 class="timeline-heading">Historia Waszych rozmów</h1>
           <p class="timeline-description">
-            Naciśnij na dowolnym miejscu osi, aby zobaczyć Wasze rozmowy z tego
-            dnia.
+            Naciśnij w dowolnym miejscu na osi czasu, aby zobaczyć Wasze rozmowy
+            z tego dnia.
           </p>
           <div class="timeline-chart-container"></div>
-          <div class="conversation-box">
-            <button class="load-prev">Pokaż wcześniejsze</button>
-            <div class="message-box-user empty-state-message">
-              Tutaj pojawią się Wasze wiadomości, gdy klikniesz na oś czasu.
-              Przenieś się w czasie!
+          <div class="timeline-details-container">
+            <div class="swear-words-container">
+              <h2 class="swear-words-title">Ile przeklinasz?</h2>
+              <p class="swear-words-explanation">
+                Im bardziej <span class="swear-red-segment">czerwony</span>
+                segment znajduje się pod osią czasu, tym więcej przekleństw się
+                pojawiało w Twoich wiadomościach!
+              </p>
+              <h3 class="swear-words-list-title">Najczęstsze przekleństwa:</h3>
+              <ol class="swear-words-list">
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+                <li>
+                  <span class="swear-word hidden"></span>:
+                  <span class="swear-word-count"></span>
+                </li>
+              </ol>
+              <button class="show-swear-words-button">
+                Pokaż przekleństwa
+              </button>
+              <small class="swear-words-note"
+                >Tylko powyższe słowa (z uwzględnieniem odmiany i najczęstszych
+                zabiegów słowotwórczych) braliśmy pod uwagę jako
+                przekleństwa.</small
+              >
             </div>
-            <button class="load-next">Pokaż późniejsze</button>
+            <div class="conversation-box">
+              <button class="load-prev">Pokaż wcześniejsze</button>
+              <div class="message-box-user empty-state-message">
+                Tutaj pojawią się Wasze wiadomości, gdy klikniesz na oś czasu.
+                Przenieś się w czasie!
+              </div>
+              <button class="load-next">Pokaż późniejsze</button>
+            </div>
           </div>
         </div>
+        <div class="conversation-back-container">
+          <button
+            onclick="location.href='#ranking-section'"
+            class="conversation-back-button"
+          >
+            Wróć do listy
+          </button>
+        </div>
       </section>
+      <footer class="page-footer">
+        <img class="logo-footer" src="logo.png" alt="Logo Za dane!" />
+        <p class="device-note">
+          Aplikacja ze względów technicznych nie może działać prawidłowo na
+          tabletach oraz smartfonach. Przystosowana jest do przeglądarek Chrome
+          oraz Firefox.
+        </p>
+        <p class="device-note">
+          Działamy samodzielnie, w ramach niezależnej od Facebooka kampanii
+          społecznościowej.
+        </p>
+        <p class="device-note">
+          Skontaktuj się z nami pod adresem
+          <a href="mailto:za.dane.kampania@gmail.com"
+            >za.dane.kampania@gmail.com</a
+          >
+        </p>
+      </footer>
     </main>
     <script type="module" src="scripts.js"></script>
   </body>

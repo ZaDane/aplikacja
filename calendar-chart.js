@@ -3,8 +3,8 @@ export default function createCalendarchart(data, containerSelector) {
   var margin = { top: 0, right: 50, bottom: 50, left: 50 },
     width = document.documentElement.clientWidth - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom,
-    colorA = "#B99FCD",
-    colorB = "#A09FCB";
+    colorA = "#ca89e1",
+    colorB = "#8191e9";
 
   var svg = d3
     .select(containerSelector + " .timeline-chart-container")
@@ -140,7 +140,51 @@ export default function createCalendarchart(data, containerSelector) {
 
   svg.selectAll(".domain").remove();
   svg.selectAll(".tick line").remove();
-  svg.selectAll(".tick text").style("color", "#777777");
+  svg
+    .selectAll(".tick text")
+    .style("color", "#777777")
+    .attr("y", "15");
+
+  const [swearWords, swearMonths] = calcSwearWords(data);
+  const maxSwears = d3.max([d3.max(swearMonths, month => month[1]), 1]);
+  const swearBars = svg
+    .selectAll("bar")
+    .data(swearMonths)
+    .enter()
+    .append("rect")
+    .attr(
+      "width",
+      d => x(d3.timeMonth.offset(new Date(d[0]), 1)) - x(new Date(d[0]))
+    )
+    .attr("height", "8")
+    .attr("x", d => x(new Date(d[0])))
+    .attr("y", height + 1)
+    .attr("fill", d => d3.interpolateReds(d[1] / maxSwears));
+
+  const spansSwearWords = document.querySelectorAll(
+    containerSelector + " .swear-word"
+  );
+  const spansSwearWordsCount = document.querySelectorAll(
+    containerSelector + " .swear-word-count"
+  );
+  swearWords.sort((a, b) => b.total - a.total);
+  swearWords.forEach((word, i) => {
+    spansSwearWords[i].textContent = word.root;
+    spansSwearWordsCount[i].textContent = word.total;
+  });
+
+  const showWordsBut = document.querySelector(
+    containerSelector + " .show-swear-words-button"
+  );
+
+  showWordsBut.addEventListener("click", () => {
+    document
+      .querySelectorAll(containerSelector + " .swear-word")
+      .forEach(word => {
+        word.classList.remove("hidden");
+        showWordsBut.disabled = true;
+      });
+  });
 }
 
 function extendLastStep(obj) {
@@ -290,4 +334,57 @@ function setupConversationBox(dayChat, data, containerSelector) {
   };
 
   return { start };
+}
+
+function calcSwearWords(data) {
+  const swearWords = [
+    { root: "kurwa", variants: ["kurw"], total: 0 },
+    { root: "jebać", variants: ["jeb"], total: 0 },
+    {
+      root: "pierdolić",
+      variants: ["pierdol", "pierdal", "pierdziel"],
+      total: 0
+    },
+    { root: "fuck", variants: ["fuck"], total: 0 },
+    { root: "srać", variants: ["sra"], total: 0 },
+    { root: "pizda", variants: ["pizd", "piźd"], total: 0 },
+    { root: "kutas", variants: ["kutas"], total: 0 },
+    { root: "fiut", variants: ["fiut", "fiucie"], total: 0 },
+    { root: "cwel", variants: ["cwel"], total: 0 },
+    { root: "chuj", variants: ["chuj"], total: 0 },
+    {
+      root: "ciota",
+      variants: ["ciota", "cioty", "cioto", "ciotę", "ciotą"],
+      total: 0
+    }
+  ];
+
+  const monthCount = d3.timeMonth
+    .range(d3.timeMonth.floor(data.getOldest()), data.getNewest())
+    .map(month => [month.getTime(), 0]);
+
+  const swearRegExp = new RegExp(
+    swearWords
+      .reduce((acc, curr) => acc + "|" + curr.variants.join("|"), "")
+      .slice(1),
+    "g",
+    "i"
+  );
+
+  let userMsgs = data.getUserMsgs();
+  userMsgs.forEach(msg => {
+    const wordsInMsg = msg.text.match(swearRegExp);
+    if (wordsInMsg) {
+      wordsInMsg.forEach(found => {
+        swearWords.find(swearWord =>
+          swearWord.variants.includes(found)
+        ).total += 1;
+        monthCount.find(
+          month => month[0] === d3.timeMonth.floor(msg.date).getTime()
+        )[1] += 1;
+      });
+    }
+  });
+
+  return [swearWords, monthCount];
 }

@@ -31,20 +31,27 @@ import createFriendsDailyChart from "./friends-daily-chart.js";
 // }
 
 function createChatStats(data, containerSelector) {
-  d3.select(containerSelector).style("display", "flex");
+  const cont = d3.select(containerSelector);
+  cont.style("display", "flex");
   if (containerSelector == ".conversation-section") {
-    d3.select(".legend-name-participant").text(data.getParticipantName());
+    cleanConvSection(data);
   }
   createBars(data, containerSelector);
   createHourChart(data, containerSelector);
   createCalendarchart(data, containerSelector);
   createWeekdaysChart(data, containerSelector);
   setupSlider(data, containerSelector);
+  document
+    .querySelector(containerSelector)
+    .scrollIntoView({ behavior: "smooth" });
 }
+
+new LuminousGallery(document.querySelectorAll(".intro-gallery-item a"));
 
 document.getElementById("fb-dir").addEventListener(
   "change",
   function(event) {
+    document.querySelector(".loader-container").style.display = "flex";
     let conversationFiles = [...event.target.files].filter(file =>
       /json$/.test(file.name)
     );
@@ -66,37 +73,59 @@ document.getElementById("fb-dir").addEventListener(
       );
     });
     Promise.all(filePromises).then(vals => {
-      // Get rid of falses
-      let conversations = vals.filter(val => val);
-      let stats = [
-        { name: "Others", msgs: [] },
-        // FB always outputs the user as second
-        { name: conversations[0][1].name, msgs: [] }
-      ];
-      conversations.forEach(conv => {
-        stats[0].msgs = stats[0].msgs.concat(
-          // Add sender's name
-          conv[0].msgs.map(msg => {
-            msg.sender = conv[0].name;
-            return msg;
-          })
-        );
-        stats[1].msgs = stats[1].msgs.concat(
-          conv[1].msgs.map(msg => {
-            msg.receiver = conv[0].name;
-            return msg;
-          })
-        );
-      });
-      const data = createDataSource(stats);
-      d3.select(".general-section").style("display", "flex");
-      createFriendsRanking(data, createChatStats);
-      createFriendsDailyChart(data, ".general-section");
-      createChatStats(data, ".general-section");
+      try {
+        // Get rid of falses
+        let conversations = vals.filter(val => val);
+        let stats = [
+          { name: "Others", msgs: [] },
+          // FB always outputs the user as second
+          { name: conversations[0][1].name, msgs: [] }
+        ];
+        conversations.forEach(conv => {
+          stats[0].msgs = stats[0].msgs.concat(
+            // Add sender's name
+            conv[0].msgs.map(msg => {
+              msg.sender = conv[0].name;
+              return msg;
+            })
+          );
+          stats[1].msgs = stats[1].msgs.concat(
+            conv[1].msgs.map(msg => {
+              msg.receiver = conv[0].name;
+              return msg;
+            })
+          );
+        });
+        const data = createDataSource(stats);
+        d3.select(".general-section").style("display", "flex");
+        document.querySelector(".loader-container").style.display = "none";
+        document.querySelector(".not-yet-loaded-message").style.display =
+          "none";
+        document.querySelector(".instruction-section").style.display = "none";
+        document.querySelector(".fb-dir-label").style.display = "none";
+        createFriendsRanking(data, createChatStats);
+        createFriendsDailyChart(data, ".general-section");
+        createChatStats(data, ".general-section");
+      } catch (e) {
+        console.log(e);
+        showError();
+        return;
+      }
     });
   },
   false
 );
+
+function showError() {
+  const container = document.querySelector(".loader-container");
+  container.classList.add("error");
+  document
+    .querySelector(".loader-error-button")
+    .addEventListener("click", () => {
+      container.classList.remove("error");
+      container.style.display = "none";
+    });
+}
 
 function setupSlider(data, containerSelector) {
   const possibleYears = d3.timeYear
@@ -128,4 +157,25 @@ function setupSlider(data, containerSelector) {
     createHourChart(newData, containerSelector);
     createFriendsDailyChart(newData, containerSelector);
   });
+}
+
+function cleanConvSection(data) {
+  const containerSelector = ".conversation-section";
+  const cont = d3.select(containerSelector);
+  d3.select(".legend-name-participant").text(data.getParticipantName());
+  if (document.querySelector(containerSelector + " .slider").hasChildNodes()) {
+    document.querySelector(containerSelector + " .slider").noUiSlider.destroy();
+  }
+  cont.selectAll(".timeline-chart-container *").remove();
+  d3.selectAll(
+    containerSelector +
+      " .message-box-user, " +
+      containerSelector +
+      " .message-box"
+  ).remove();
+  d3.select(containerSelector + " .conversation-box")
+    .insert("div", ".load-next")
+    .attr("class", "message-box-user empty-state-message")
+    .text("Tutaj pojawią się Wasze wiadomości, gdy klikniesz na oś czasu.");
+  cont.select(".conversation-name-text").text(data.getParticipantName());
 }
